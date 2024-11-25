@@ -8,7 +8,6 @@
   <text id="dstActiveText" x="50" y="200" font-size="16" fill="black"></text>
 
   <script type="text/javascript">
-    <![CDATA[
     // Function to make the API call
     async function fetchTime() {
       try {
@@ -42,6 +41,5 @@
       const referrer = document.referrer;
       document.getElementById('referrerText').textContent = `Referrer: ${referrer}`;
     });
-    ]]>
   </script>
 </svg>
