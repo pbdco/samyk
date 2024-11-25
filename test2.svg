@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Local Time SVG</title>
+</head>
+<body>
     <svg width="500" height="300" xmlns="http://www.w3.org/2000/svg">
         <rect width="500" height="300" fill="lightblue"/>
         <text id="timeText" x="50" y="50" font-size="24" fill="black">Loading time...</text>
@@ -27,3 +33,5 @@
             });
         </script>
     </svg>
+</body>
+</html>
