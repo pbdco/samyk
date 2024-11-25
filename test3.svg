@@ -1,30 +1,26 @@
 <svg width="500" height="300" xmlns="http://www.w3.org/2000/svg">
-    <rect width="500" height="300" fill="lightblue"/>
-    <text id="timeText" x="50" y="50" font-size="24" fill="black">Loading time...</text>
-    <text id="referrerText" x="50" y="80" font-size="16" fill="black"></text>
-    <text id="dateText" x="50" y="110" font-size="16" fill="black"></text>
-    <text id="timeZoneText" x="50" y="140" font-size="16" fill="black"></text>
-    <text id="dayOfWeekText" x="50" y="170" font-size="16" fill="black"></text>
-    <text id="dstActiveText" x="50" y="200" font-size="16" fill="black"></text>
-    <script xmlns="http://www.w3.org/1999/xhtml" type="text/javascript">
+  <rect width="500" height="300" fill="lightblue"/>
+  <text id="timeText" x="50" y="50" font-size="24" fill="black">Loading...</text>
+  <text id="referrerText" x="50" y="80" font-size="16" fill="black"></text>
+  <text id="dateText" x="50" y="110" font-size="16" fill="black"></text>
+  <text id="timeZoneText" x="50" y="140" font-size="16" fill="black"></text>
+  <text id="dayOfWeekText" x="50" y="170" font-size="16" fill="black"></text>
+  <text id="dstActiveText" x="50" y="200" font-size="16" fill="black"></text>
+  <script type="application/ecmascript">
     <![CDATA[
-        function updateTime() {
-            var now = new Date();
-            var options = { timeZone: 'Europe/Amsterdam', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            var formattedTime = now.toLocaleString('en-US', options);
-            var isDST = now.getTimezoneOffset() < new Date(now.getFullYear(), 0, 1).getTimezoneOffset();
-            document.getElementById('timeText').textContent = now.toLocaleTimeString() + ' - ' + formattedTime;
-            document.getElementById('dateText').textContent = 'Date: ' + now.toLocaleDateString();
-            document.getElementById('timeZoneText').textContent = 'TimeZone: Europe/Amsterdam';
-            document.getElementById('dayOfWeekText').textContent = 'Day of Week: ' + now.toLocaleDateString('en-US', { weekday: 'long' });
-            document.getElementById('dstActiveText').textContent = 'DST Active: ' + isDST;
-        }
-        updateTime();
-        setInterval(updateTime, 1000);
-        window.addEventListener('load', function() {
-            var referrer = document.referrer;
-            document.getElementById('referrerText').textContent = 'Referrer: ' + referrer;
-        });
+    function updateTime() {
+      var now = new Date();
+      document.getElementById('timeText').textContent = now.toLocaleString();
+      document.getElementById('dateText').textContent = 'Date: ' + now.toLocaleDateString();
+      document.getElementById('timeZoneText').textContent = 'TimeZone: Europe/Amsterdam';
+      document.getElementById('dayOfWeekText').textContent = 'Day of Week: ' + now.toLocaleDateString('en-US', { weekday: 'long' });
+      document.getElementById('dstActiveText').textContent = 'DST Active: ' + (now.getTimezoneOffset() < new Date(now.getFullYear(), 0, 1).getTimezoneOffset());
+    }
+    updateTime();
+    setInterval(updateTime, 1000);
+    window.addEventListener('load', function() {
+      document.getElementById('referrerText').textContent = 'Referrer: ' + document.referrer;
+    });
     ]]>
-    </script>
+  </script>
 </svg>
