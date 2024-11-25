@@ -7,22 +7,24 @@
     <text id="dayOfWeekText" x="50" y="170" font-size="16" fill="black"></text>
     <text id="dstActiveText" x="50" y="200" font-size="16" fill="black"></text>
     <script xmlns="http://www.w3.org/1999/xhtml" type="text/javascript">
+    <![CDATA[
         function updateTime() {
-            const now = new Date();
-            const options = { timeZone: 'Europe/Amsterdam', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const formattedTime = now.toLocaleString('en-US', options);
-            const isDST = now.getTimezoneOffset() < new Date(now.getFullYear(), 0, 1).getTimezoneOffset();
-            document.getElementById('timeText').textContent = `${now.toLocaleTimeString()} - ${formattedTime}`;
-            document.getElementById('dateText').textContent = `Date: ${now.toLocaleDateString()}`;
-            document.getElementById('timeZoneText').textContent = `TimeZone: Europe/Amsterdam`;
-            document.getElementById('dayOfWeekText').textContent = `Day of Week: ${now.toLocaleDateString('en-US', { weekday: 'long' })}`;
-            document.getElementById('dstActiveText').textContent = `DST Active: ${isDST}`;
+            var now = new Date();
+            var options = { timeZone: 'Europe/Amsterdam', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            var formattedTime = now.toLocaleString('en-US', options);
+            var isDST = now.getTimezoneOffset() < new Date(now.getFullYear(), 0, 1).getTimezoneOffset();
+            document.getElementById('timeText').textContent = now.toLocaleTimeString() + ' - ' + formattedTime;
+            document.getElementById('dateText').textContent = 'Date: ' + now.toLocaleDateString();
+            document.getElementById('timeZoneText').textContent = 'TimeZone: Europe/Amsterdam';
+            document.getElementById('dayOfWeekText').textContent = 'Day of Week: ' + now.toLocaleDateString('en-US', { weekday: 'long' });
+            document.getElementById('dstActiveText').textContent = 'DST Active: ' + isDST;
         }
         updateTime();
         setInterval(updateTime, 1000);
-        window.addEventListener('load', () => {
-            const referrer = document.referrer;
-            document.getElementById('referrerText').textContent = `Referrer: ${referrer}`;
+        window.addEventListener('load', function() {
+            var referrer = document.referrer;
+            document.getElementById('referrerText').textContent = 'Referrer: ' + referrer;
         });
+    ]]>
     </script>
 </svg>
