@@ -1,2 +1,2 @@
 # Welcome
-![](./test2.svg)
+![](./test3.svg)
