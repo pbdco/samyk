@@ -1,45 +1,29 @@
-<svg width="500" height="300" xmlns="http://www.w3.org/2000/svg">
-  <rect width="500" height="300" fill="lightblue"/>
-  <text id="timeText" x="50" y="50" font-size="24" fill="black">Loading time...</text>
-  <text id="referrerText" x="50" y="80" font-size="16" fill="black"></text>
-  <text id="dateText" x="50" y="110" font-size="16" fill="black"></text>
-  <text id="timeZoneText" x="50" y="140" font-size="16" fill="black"></text>
-  <text id="dayOfWeekText" x="50" y="170" font-size="16" fill="black"></text>
-  <text id="dstActiveText" x="50" y="200" font-size="16" fill="black"></text>
+    <svg width="500" height="300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="500" height="300" fill="lightblue"/>
+        <text id="timeText" x="50" y="50" font-size="24" fill="black">Loading time...</text>
+        <text id="referrerText" x="50" y="80" font-size="16" fill="black"></text>
+        <text id="dateText" x="50" y="110" font-size="16" fill="black"></text>
+        <text id="timeZoneText" x="50" y="140" font-size="16" fill="black"></text>
+        <text id="dayOfWeekText" x="50" y="170" font-size="16" fill="black"></text>
+        <text id="dstActiveText" x="50" y="200" font-size="16" fill="black"></text>
+        <script type="text/javascript">
+            function updateTime() {
+                const now = new Date();
+                const options = { timeZone: 'Europe/Amsterdam', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                const formattedTime = now.toLocaleString('en-US', options);
+                const isDST = now.getTimezoneOffset() < new Date(now.getFullYear(), 0, 1).getTimezoneOffset();
 
-  <script type="text/javascript">
-    // Function to make the API call
-    async function fetchTime() {
-      try {
-        const response = await fetch('https://timeapi.io/api/time/current/zone?timeZone=Europe%2FAmsterdam', {
-          method: 'GET',
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-        if (response.ok) {
-          const data = await response.json();
-          const formattedTime = `${data.dayOfWeek}, ${data.date} - ${data.time}`;
-          document.getElementById('timeText').textContent = formattedTime;
-          document.getElementById('dateText').textContent = `Date: ${data.date}`;
-          document.getElementById('timeZoneText').textContent = `TimeZone: ${data.timeZone}`;
-          document.getElementById('dayOfWeekText').textContent = `Day of Week: ${data.dayOfWeek}`;
-          document.getElementById('dstActiveText').textContent = `DST Active: ${data.dstActive}`;
-        } else {
-          document.getElementById('timeText').textContent = 'Error fetching time';
-        }
-      } catch (error) {
-        document.getElementById('timeText').textContent = 'Error fetching time';
-      }
-    }
-
-    // Fetch the time when the SVG is loaded
-    fetchTime();
-
-    // Set the referrer URL
-    window.addEventListener('load', () => {
-      const referrer = document.referrer;
-      document.getElementById('referrerText').textContent = `Referrer: ${referrer}`;
-    });
-  </script>
-</svg>
+                document.getElementById('timeText').textContent = `${now.toLocaleTimeString()} - ${formattedTime}`;
+                document.getElementById('dateText').textContent = `Date: ${now.toLocaleDateString()}`;
+                document.getElementById('timeZoneText').textContent = `TimeZone: Europe/Amsterdam`;
+                document.getElementById('dayOfWeekText').textContent = `Day of Week: ${now.toLocaleDateString('en-US', { weekday: 'long' })}`;
+                document.getElementById('dstActiveText').textContent = `DST Active: ${isDST}`;
+            }
+            updateTime();
+            setInterval(updateTime, 1000);
+            window.addEventListener('load', () => {
+                const referrer = document.referrer;
+                document.getElementById('referrerText').textContent = `Referrer: ${referrer}`;
+            });
+        </script>
+    </svg>
